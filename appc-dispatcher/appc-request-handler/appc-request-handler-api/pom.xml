@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+		<parent>
+	    <groupId>org.openecomp.appc</groupId>
+	    <artifactId>appc-request-handler</artifactId>
+	    <version>1.1.0-SNAPSHOT</version>
+	  </parent>
+	<artifactId>appc-request-handler-api</artifactId>
+	<packaging>bundle</packaging>
+
+	<name>appc-request-handler-api</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>	
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openecomp.appc</groupId>
+			<artifactId>appc-data-access-lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openecomp.appc</groupId>
+			<artifactId>appc-command-executor-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openecomp.appc</groupId>
+			<artifactId>appc-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Export-Package>org.openecomp.appc.requesthandler,org.openecomp.appc.requesthandler.objects,org.openecomp.appc.transactionrecorder,org.openecomp.appc.message</Export-Package>
+						<Embed-Dependency>
+							javax.json;scope=compile|runtime;inline=false
+						</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
+						<Import-Package>
+							org.openecomp.appc.domainmodel.lcm,
+							*;resolution:=optional
+						</Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
